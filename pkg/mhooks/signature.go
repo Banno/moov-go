@@ -24,7 +24,7 @@ func checkSignature(headers http.Header, secret string) (bool, error) {
 		return false, err
 	}
 
-	if *wantHash == gotHash {
+	if hmac.Equal([]byte(*wantHash), []byte(gotHash)) {
 		return true, nil
 	} else {
 		return false, nil
